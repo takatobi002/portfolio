@@ -1,0 +1,56 @@
+site_name: Your Site Name
+site_description: 研究活動と事業活動の紹介
+site_author: Taichi Abe(阿部 太一)
+site_url: https://takatobi002.github.io/portfolio/
+
+theme:
+  name: material
+  language: ja
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - ホーム: index.md
+  - ビジネス:
+    - サービス: business/services.md
+    - 実績: business/achievements.md
+  - 研究:
+    - 概要: research/overview.md
+    - 出版物: research/publications.md
+  - お問い合わせ: contact.md
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - footnotes
+  - admonition
+  - pymdownx.details
+
+plugins:
+  - search:
+      lang: ja 
