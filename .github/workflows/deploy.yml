@@ -7,6 +7,10 @@ on:
     branches:
       - main
 
+# 追加する権限設定
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
