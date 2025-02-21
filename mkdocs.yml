@@ -28,15 +28,13 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
+
 nav:
   - ホーム: index.md
-  - ビジネス:
-    - サービス: business/services.md
-    - 実績: business/achievements.md
-  - 研究:
-    - 概要: research/overview.md
-    - 出版物: research/publications.md
+  - 実績: achievements.md
+  - 研究: publications.md
   - お問い合わせ: contact.md
+
 
 markdown_extensions:
   - attr_list
