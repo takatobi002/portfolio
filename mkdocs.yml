@@ -31,7 +31,7 @@ theme:
 
 nav:
   - ホーム: index.md
-  - 実績: achievements.md
+  - 実績: projects.md
   - 研究: publications.md
   - お問い合わせ: contact.md
 
