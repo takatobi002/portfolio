@@ -1,12 +1,11 @@
-# お問い合わせ
+# Contact
 
-## 連絡先情報
-- Email: your.email@example.com
+## SNS
+
 - Twitter: [@takatobi002](https://twitter.com/takatobi002)
-- LinkedIn: [Taichi Abe](https://www.linkedin.com/in/taichi-abe-981b3817b/)
+- LinkedIn: https://www.linkedin.com/in/taichi-abe-981b3817b/
+- note: https://note.com/chitabea
+- tayo: https://tayo.jp/users/O0vf5vk2FcXc1vKcPdKqgEjfH2D3
 
-## 研究関連のお問い合わせ
-研究内容や共同研究についてのお問い合わせは...
-
-## ビジネス関連のお問い合わせ
-サービスや業務提携についてのお問い合わせは... 
+## Email
+ contact@chitabea.com
