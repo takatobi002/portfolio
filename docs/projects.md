@@ -1,18 +1,11 @@
-# 活動中の取り組み
+# 活動
 
 ## やさしい卒論発表会
-準備中
+https://note.com/himalab/m/m1bea5c9cac19
 
 ## Poetech太宰府
-準備中
-
 https://sites.google.com/view/poetech-dazaifu/home
 
-## ステビンス読書会
-準備中
-
-
-# これまでの取り組み
-
-## 福岡市エンジニアカフェ　コミュニティマネージャー
-準備中
+## 読書会
+### 【終了】『Serious Leisure: A Perspective for Our Time』
+https://note.com/chitabea/n/n009230557b10
