@@ -2,6 +2,7 @@
 
 ## Link
 
+- Researchmap: [Taichi ABE](https://researchmap.jp/chitabea)
 - Twitter: [@takatobi002](https://twitter.com/takatobi002)
 - LinkedIn: [Taichi ABE](https://www.linkedin.com/in/taichi-abe-981b3817b/)
 - Facebook: [Taichi ABE](https://www.facebook.com/taichi.abe.560)
@@ -11,4 +12,4 @@
 - [Google Scholar](https://scholar.google.co.jp/citations?hl=ja&user=FQ-owvMAAAAJ)
 
 ## Email
- contact@chitabea.com
+cd250501@cis.fukuoka-u.ac.jp
