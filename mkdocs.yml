@@ -1,54 +1,10 @@
 site_name: Taichi Abe's Site
-site_description: 阿部太一（Taichi Abe）のウェブサイトです。好奇心とやさしさを大切に、シリアスレジャー論・商学・ICTを中心とした研究やプロジェクトに取り組んでいます。
-site_author: Taichi Abe(阿部 太一)
-site_url: https://takatobi002.github.io/portfolio/
-
+site_description: 現在、サイトの内容を準備しています。
+site_url: https://www.chitabea.com/
 theme:
   name: material
   language: ja
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.top
-    - search.highlight
-    - search.suggest
-  palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-
-
+  custom_dir: overrides
 nav:
   - ホーム: index.md
-  - 活動: projects.md
-  - 研究: publications.md
-  - お問い合わせ: contact.md
-
-
-markdown_extensions:
-  - attr_list
-  - md_in_html
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.superfences
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - footnotes
-  - admonition
-  - pymdownx.details
-
-plugins:
-  - search:
-      lang: ja 
+plugins: []
