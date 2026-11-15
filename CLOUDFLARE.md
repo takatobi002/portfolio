@@ -38,3 +38,9 @@ Until a custom domain is verified, use the returned workers.dev address. Move DN
 - Admin password is configured as a Worker secret.
 - Custom-domain cutover is pending addition of `chitabea.com` to Cloudflare DNS and nameserver configuration at the registrar.
 - The legacy GitHub Pages branch remains in place as a fallback. The build workflow no longer republishes it; future releases use Cloudflare.
+
+## MuuMuu Mail / external DNS
+
+MuuMuu Mail requires retaining MuuMuu DNS. Do not switch nameservers. Use Pages project `chitabea-web` for the public website; `www.chitabea.com` can be connected using a CNAME at MuuMuu DNS after registering that custom hostname in Pages. Keep all mail records and the apex domain unchanged. The Pages gateway forwards API/admin requests through a service binding to the existing `chitabea` Worker; D1 and the teacher secret stay there.
+
+Build with `npm run build:pages`, deploy with `npm run deploy:pages`. Deploy the backend Worker before generating Pages `_worker.js` assets (or rebuild using `npm run build` before a backend deployment). Pages publishing requires `pages:write` permission. Domain-connection status above is superseded by this external-DNS configuration.
