@@ -29,6 +29,16 @@
     .rung input:checked + span { background:var(--green); border-color:var(--green); color:white; }
     .rung input:focus-visible + span { outline:3px solid #d38b39; outline-offset:3px; }
     .rung:hover span { border-color:var(--green); }
+    .related { border-top:1px solid var(--line); margin-top:28px; padding-top:28px; }
+    .extra-question { margin-top:28px; }
+    .extra-question legend { margin-bottom:8px; font-size:18px; }
+    .choices { display:flex; flex-wrap:wrap; gap:10px; }
+    .choices label { display:flex; align-items:center; gap:7px; border:1px solid var(--line); border-radius:8px; padding:10px 14px; cursor:pointer; }
+    .choices label:has(input:checked) { background:#e5f0e7; border-color:var(--green); }
+    .answer-list { margin:20px 0; }
+    .answer-list div { border-top:1px solid var(--line); padding:12px 0; }
+    .answer-list dt { font-weight:700; }
+    .answer-list dd { margin:4px 0 0; }
     .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
     button { font:inherit; min-height:48px; border-radius:9px; padding:10px 22px; cursor:pointer; border:1px solid var(--green); background:var(--green); color:white; }
     button:disabled { opacity:.5; cursor:not-allowed; }
@@ -52,7 +62,7 @@
     <p class="eyebrow">LECTURE WORKSHEET</p>
     <h1>人生のはしご</h1>
     <p>今の自分の人生全体を、どのように評価しますか。</p>
-    <p class="note">全1問・約1分｜回答は任意です。名前の入力は不要です。回答は外部に送信・保存されません。再読み込みすると消えます。</p>
+    <p class="note">全6問・約3分｜回答は任意です。名前の入力は不要です。回答は外部に送信・保存されません。再読み込みすると消えます。</p>
   </header>
   <noscript><p class="card">このワークにはJavaScriptが必要です。利用できない場合は、下の質問を読み、選んだ段数を手元にメモしてください。</p></noscript>
   <form id="worksheet" class="card" autocomplete="off">
@@ -76,15 +86,17 @@
         <label class="rung"><input type="radio" name="life-evaluation" value="0"><span><strong>0</strong><small>あなたにとって最悪の人生</small></span></label>
       </div>
     </fieldset>
-    <p class="note" id="privacy-note" style="margin-top:20px">正解・不正解はありません。段数を他の人に見せる必要はありません。</p>
+    <p class="note" id="privacy-note" style="margin-top:20px">正解・不正解はありません。回答を他の人に見せる必要はありません。各質問は、答えずに進むこともできます。</p>
+<section class="related" aria-labelledby="related-title"><h2 id="related-title">人生評価に関係する質問</h2><p class="note">以下は英語の設問をもとにした授業用の日本語訳です。公式日本語調査票ではありません。</p><fieldset class="extra-question"><legend>2. 社会的支援</legend><p>困ったとき、必要に応じて助けを頼める親族や友人はいますか。</p><div class="choices"><label><input type="radio" name="support" value="はい"> はい</label><label><input type="radio" name="support" value="いいえ"> いいえ</label><label><input type="radio" name="support" value="回答しない"> わからない／回答しない</label></div></fieldset><fieldset class="extra-question"><legend>3. 人生を選択する自由</legend><p>自分の人生で何をするかを選ぶ自由について、満足していますか、それとも不満ですか。</p><div class="choices"><label><input type="radio" name="freedom" value="満足"> 満足</label><label><input type="radio" name="freedom" value="不満"> 不満</label><label><input type="radio" name="freedom" value="回答しない"> わからない／回答しない</label></div></fieldset><fieldset class="extra-question"><legend>4. 寄付行動（寛容さの指標）</legend><p>この1か月間に、慈善団体にお金を寄付しましたか。</p><div class="choices"><label><input type="radio" name="donation" value="はい"> はい</label><label><input type="radio" name="donation" value="いいえ"> いいえ</label><label><input type="radio" name="donation" value="回答しない"> わからない／回答しない</label></div></fieldset><fieldset class="extra-question"><legend>5. 政府の腐敗の認識</legend><p>政府全体に腐敗が広がっていると思いますか。</p><div class="choices"><label><input type="radio" name="government" value="はい"> はい</label><label><input type="radio" name="government" value="いいえ"> いいえ</label><label><input type="radio" name="government" value="回答しない"> わからない／回答しない</label></div></fieldset><fieldset class="extra-question"><legend>6. 企業の腐敗の認識</legend><p>企業に腐敗が広がっていると思いますか。</p><div class="choices"><label><input type="radio" name="business" value="はい"> はい</label><label><input type="radio" name="business" value="いいえ"> いいえ</label><label><input type="radio" name="business" value="回答しない"> わからない／回答しない</label></div></fieldset></section>
     <div class="actions">
-      <button id="confirm" type="submit" disabled>自分の回答を確認する</button>
+      <button id="confirm" type="submit">回答を確認する</button>
       <button id="skip" type="button" class="secondary">回答せずに進む</button>
     </div>
   </form>
   <section id="result" class="card" hidden aria-labelledby="result-title" tabindex="-1">
     <h2 id="result-title">あなたが選んだ段数</h2>
     <p class="score" id="score"></p>
+    <dl id="answer-list" class="answer-list"></dl>
     <div class="reflection">
       <p><strong>何を思い浮かべて、その段数を選びましたか。</strong></p>
       <p>理由を自分の中で振り返ってみてください。書いたり、発表したりする必要はありません。</p>
@@ -92,11 +104,11 @@
     <p class="note">この回答には、合格・不合格や「望ましい点数」はありません。</p>
     <details id="explanation">
       <summary>この質問と、世界幸福度報告について</summary>
-      <p>これは「キャントリルのはしご（Cantril Ladder）」の質問を、授業用に日本語に訳したものです。公式日本語版の調査票ではありません。</p>
+      <p>最初の質問は「キャントリルのはしご（Cantril Ladder）」の質問を、授業用に日本語に訳したものです。公式日本語版の調査票ではありません。</p>
       <p>世界幸福度報告の幸福度ランキングは、この人生評価の質問への回答をもとに、原則として直近3年間の国別平均で作られます。日々の楽しさを直接順位にしたものではありません。</p>
-      <p>所得や社会的支援などの六つの要因は、人生評価の違いを説明するために使われます。六つの点数を合計して順位を決めるわけではありません。</p>
+      <p>所得や社会的支援などの六つの要因は、人生評価の違いを説明するために使われます。六つの点数を合計して順位を決めるわけではありません。所得には1人あたりGDP、健康寿命にはWHO等の外部統計を使うため、このフォームに対応する質問はありません。寛容さの指標は寄付の回答を国の所得水準で調整したもので、個人の寛容さを判定するものではありません。</p>
       <p>このページは自分で測定を体験するためのもので、クラスの回答収集・集計は行いません。</p>
-      <p class="note">出典：<a href="https://www.worldhappiness.report/faq/" target="_blank" rel="noopener noreferrer">World Happiness Report — Frequently Asked Questions</a></p>
+      <p class="note">出典：<a href="https://www.worldhappiness.report/faq/" target="_blank" rel="noopener noreferrer">World Happiness Report — Frequently Asked Questions</a>／<a href="https://files.worldhappiness.report/WHR26_Statistical_Appendix.pdf" target="_blank" rel="noopener noreferrer">2026年統計付録（質問と指標の定義、pp.1–2）</a></p>
     </details>
     <div class="actions"><button id="reset" type="button" class="secondary">回答を消して最初に戻る</button></div>
   </section>
@@ -110,25 +122,37 @@
   const title = document.getElementById('result-title');
   const score = document.getElementById('score');
   const reflection = document.querySelector('.reflection');
+  const relatedQuestions = [["support","社会的支援"],["freedom","人生を選択する自由"],["donation","寄付行動（寛容さの指標）"],["government","政府の腐敗の認識"],["business","企業の腐敗の認識"]];
+  const answerList = document.getElementById('answer-list');
   function showResult(value) {
     form.hidden = true;
     result.hidden = false;
-    title.textContent = value === null ? '回答せずに進みました' : 'あなたが選んだ段数';
+    title.textContent = 'あなたの回答';
+    answerList.replaceChildren();
+    for (const [name, label] of relatedQuestions) {
+      const row = document.createElement('div');
+      const term = document.createElement('dt');
+      const answer = document.createElement('dd');
+      term.textContent = label;
+      answer.textContent = form.querySelector('input[name="' + name + '"]:checked')?.value || '未回答';
+      row.append(term, answer);
+      answerList.append(row);
+    }
     score.textContent = value === null ? '' : value + ' / 10';
     score.hidden = value === null;
     reflection.hidden = value === null;
     result.focus();
   }
-  form.addEventListener('change', () => { confirmButton.disabled = !form.querySelector('input:checked'); });
+  
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const selected = form.querySelector('input:checked');
-    if (selected) showResult(selected.value);
+    const selected = form.querySelector('input[name="life-evaluation"]:checked');
+    showResult(selected ? selected.value : null);
   });
-  document.getElementById('skip').addEventListener('click', () => { form.reset(); confirmButton.disabled = true; showResult(null); });
+  document.getElementById('skip').addEventListener('click', () => { form.reset(); confirmButton.disabled = false; showResult(null); });
   document.getElementById('reset').addEventListener('click', () => {
     form.reset();
-    confirmButton.disabled = true;
+    confirmButton.disabled = false;
     score.textContent = '';
     document.getElementById('explanation').open = false;
     result.hidden = true;
