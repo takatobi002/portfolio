@@ -43,4 +43,6 @@ Until a custom domain is verified, use the returned workers.dev address. Move DN
 
 MuuMuu Mail requires retaining MuuMuu DNS. Do not switch nameservers. Use Pages project `chitabea-web` for the public website; `www.chitabea.com` can be connected using a CNAME at MuuMuu DNS after registering that custom hostname in Pages. Keep all mail records and the apex domain unchanged. The Pages gateway forwards API/admin requests through a service binding to the existing `chitabea` Worker; D1 and the teacher secret stay there.
 
-Build with `npm run build:pages`, deploy with `npm run deploy:pages`. Deploy the backend Worker before generating Pages `_worker.js` assets (or rebuild using `npm run build` before a backend deployment). Pages publishing requires `pages:write` permission. Domain-connection status above is superseded by this external-DNS configuration.
+Build with `npm run build:pages`, deploy with `npm run deploy:pages`. Server gateway code lives outside public assets in `pages/functions/`; `_routes.json` invokes it only for API/admin paths. Pages publishing requires `pages:write` permission. Domain-connection status above is superseded by this external-DNS configuration.
+
+Pages deployment: https://chitabea-web.pages.dev. The custom domain `www.chitabea.com` is registered with Pages and awaits a CNAME at MuuMuu DNS pointing `www` to `chitabea-web.pages.dev`. Nameservers must stay `dns01.muumuu-domain.com` and `dns02.muumuu-domain.com`.
