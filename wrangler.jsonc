@@ -21,7 +21,7 @@
     {
       "binding": "DB",
       "database_name": "chitabea-responses",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "38efdc11-78d2-4812-9b08-2bd64b95c886",
       "migrations_dir": "migrations"
     }
   ],

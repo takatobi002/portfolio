@@ -28,3 +28,13 @@ Until a custom domain is verified, use the returned workers.dev address. Move DN
 `npm test` runs validation/authentication checks. `mkdocs build --strict` checks the entire existing site. Apply local D1 migrations, set a throwaway `.dev.vars` password and run `npm run dev`, then `node test/local-integration.mjs` to test local persistence and aggregation. The integration script is hardcoded to localhost and creates only local synthetic records.
 
 `npx wrangler deploy --dry-run` validates Worker packaging. Remote data and domain behavior require separate verification.
+
+## Current deployment
+
+- Cloudflare account: takatobi002@gmail.com
+- Worker: `chitabea`
+- URL: https://chitabea.takatobi002.workers.dev
+- Production D1: `chitabea-responses` (`38efdc11-78d2-4812-9b08-2bd64b95c886`).
+- Admin password is configured as a Worker secret.
+- Custom-domain cutover is pending addition of `chitabea.com` to Cloudflare DNS and nameserver configuration at the registrar.
+- The legacy GitHub Pages branch remains in place as a fallback. The build workflow no longer republishes it; future releases use Cloudflare.
