@@ -1,0 +1,22 @@
+// Run against a disposable local D1 database, never a deployed site.
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const base='http://127.0.0.1:8787';
+const secret=(await readFile(new URL('../.dev.vars',import.meta.url),'utf8')).match(/^ADMIN_PASSWORD=(.+)$/m)[1];
+const authorization='Basic '+btoa('teacher:'+secret);
+for(const path of ['/','/life-evaluation/','/regulatory-focus/','/projects/','/publications/','/contact/']) assert.equal((await fetch(base+path)).status,200,path);
+for(const path of ['/admin','/api/admin/cohorts','/api/admin/export.csv?cohort=integration']) assert.equal((await fetch(base+path)).status,401,path);
+const cohort='integration-'+crypto.randomUUID();
+const payload={id:crypto.randomUUID(),cohort,consent:true,life_evaluation:0,support:'はい',freedom:'満足',donation:null,government:'回答しない',business:'いいえ'};
+const post=body=>fetch(base+'/api/life-evaluation',{method:'POST',headers:{origin:base,'content-type':'application/json'},body:JSON.stringify(body)});
+assert.equal((await post(payload)).status,200);
+assert.equal((await post(payload)).status,200);
+assert.equal((await post({...payload,id:crypto.randomUUID(),life_evaluation:10,support:'いいえ'})).status,200);
+assert.equal((await post({...payload,id:crypto.randomUUID(),life_evaluation:null,support:null})).status,200);
+assert.equal((await post({...payload,id:crypto.randomUUID(),life_evaluation:12})).status,400);
+const get=path=>fetch(base+path,{headers:{authorization}});
+const stats=await (await get('/api/admin/stats?cohort='+cohort)).json();
+assert.equal(stats.total,3);assert.equal(stats.n,2);assert.equal(stats.mean,5);assert.equal(stats.median,5);assert.equal(stats.histogram[0],1);assert.equal(stats.histogram[10],1);assert.equal(stats.answers.support['未回答'],1);
+const csv=await (await get('/api/admin/export.csv?cohort='+cohort)).text();assert.equal(csv.split('\r\n').length,4);
+const admin=await get('/admin');assert.equal(admin.headers.get('cache-control'),'no-store');assert.match(await admin.text(),/先生用集計/);
+console.log('PASS: all site routes; private admin; local D1 save and retry deduplication; zero, missing data, mean, median, distribution and CSV');
