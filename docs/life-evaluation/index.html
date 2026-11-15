@@ -62,10 +62,19 @@
     <p class="eyebrow">LECTURE WORKSHEET</p>
     <h1>人生のはしご</h1>
     <p>今の自分の人生全体を、どのように評価しますか。</p>
-    <p class="note">全6問・約3分｜回答は任意です。名前の入力は不要です。希望する場合のみ、回答を匿名で授業内の統計に送信できます。名前・学籍番号・メールアドレスは収集しません。</p>
+    <p class="note">全6問・約3分｜回答は任意です。名前の入力は不要です。回答は匿名で授業内の統計に使います。送信しない場合はチェックを外してください。名前・学籍番号・メールアドレスは収集しません。</p>
   </header>
   <noscript><p class="card">このワークにはJavaScriptが必要です。利用できない場合は、下の質問を読み、選んだ段数を手元にメモしてください。</p></noscript>
   <form id="worksheet" class="card" autocomplete="off">
+    <section id="submission" aria-labelledby="submission-title">
+      <h2 id="submission-title">授業の統計に協力する（任意）</h2>
+      <p class="note">選んだ回答と授業回・送信日時を匿名で保存します。担当教員のみが確認し、授業内の統計・振り返りに使用します。送信しなくても、成績には影響しません。</p>
+      <p class="note" id="cohort-label"></p>
+      <label><input type="checkbox" id="consent" checked> 回答を匿名で授業の統計に送信します。送信しない場合はチェックを外してください。</label>
+      <div hidden aria-hidden="true"><label>この欄は空欄のままにしてください<input name="website" id="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="note">送信後に「最初に戻る」を押しても、保存済みの回答は削除されません。</p>
+    </section>
+
     <div class="question" id="question-description">
       <p>一番下が0、一番上が10の、はしごを想像してください。</p>
       <p>一番上の10は、あなたにとって<strong>最良の人生</strong>を、一番下の0は、あなたにとって<strong>最悪の人生</strong>を表します。</p>
@@ -89,7 +98,7 @@
     <p class="note" id="privacy-note" style="margin-top:20px">正解・不正解はありません。回答を他の人に見せる必要はありません。各質問は、答えずに進むこともできます。</p>
 <section class="related" aria-labelledby="related-title"><h2 id="related-title">人生評価に関係する質問</h2><p class="note">以下は英語の設問をもとにした授業用の日本語訳です。公式日本語調査票ではありません。</p><fieldset class="extra-question"><legend>2. 社会的支援</legend><p>困ったとき、必要に応じて助けを頼める親族や友人はいますか。</p><div class="choices"><label><input type="radio" name="support" value="はい"> はい</label><label><input type="radio" name="support" value="いいえ"> いいえ</label><label><input type="radio" name="support" value="回答しない"> わからない／回答しない</label></div></fieldset><fieldset class="extra-question"><legend>3. 人生を選択する自由</legend><p>自分の人生で何をするかを選ぶ自由について、満足していますか、それとも不満ですか。</p><div class="choices"><label><input type="radio" name="freedom" value="満足"> 満足</label><label><input type="radio" name="freedom" value="不満"> 不満</label><label><input type="radio" name="freedom" value="回答しない"> わからない／回答しない</label></div></fieldset><fieldset class="extra-question"><legend>4. 寄付行動（寛容さの指標）</legend><p>この1か月間に、慈善団体にお金を寄付しましたか。</p><div class="choices"><label><input type="radio" name="donation" value="はい"> はい</label><label><input type="radio" name="donation" value="いいえ"> いいえ</label><label><input type="radio" name="donation" value="回答しない"> わからない／回答しない</label></div></fieldset><fieldset class="extra-question"><legend>5. 政府の腐敗の認識</legend><p>政府全体に腐敗が広がっていると思いますか。</p><div class="choices"><label><input type="radio" name="government" value="はい"> はい</label><label><input type="radio" name="government" value="いいえ"> いいえ</label><label><input type="radio" name="government" value="回答しない"> わからない／回答しない</label></div></fieldset><fieldset class="extra-question"><legend>6. 企業の腐敗の認識</legend><p>企業に腐敗が広がっていると思いますか。</p><div class="choices"><label><input type="radio" name="business" value="はい"> はい</label><label><input type="radio" name="business" value="いいえ"> いいえ</label><label><input type="radio" name="business" value="回答しない"> わからない／回答しない</label></div></fieldset></section>
     <div class="actions">
-      <button id="confirm" type="submit">回答を確認する</button>
+      <button id="confirm" type="submit">回答を送信する</button>
       <button id="skip" type="button" class="secondary">回答せずに進む</button>
     </div>
   </form>
@@ -110,114 +119,106 @@
       <p>送信に同意した回答のみ、Cloudflareのデータベースに保存し、授業内の統計・振り返りに使用します。個別回答と集計結果を確認できるのは担当教員のみです。回答・送信は任意で、成績には関係しません。</p>
       <p class="note">出典：<a href="https://www.worldhappiness.report/faq/" target="_blank" rel="noopener noreferrer">World Happiness Report — Frequently Asked Questions</a>／<a href="https://files.worldhappiness.report/WHR26_Statistical_Appendix.pdf" target="_blank" rel="noopener noreferrer">2026年統計付録（質問と指標の定義、pp.1–2）</a></p>
     </details>
-    <section id="submission" aria-labelledby="submission-title">
-      <h2 id="submission-title">授業の統計に協力する（任意）</h2>
-      <p class="note">選んだ回答と授業回・送信日時を匿名で保存します。担当教員のみが確認し、授業内の統計・振り返りに使用します。送信しなくても、成績には影響しません。</p>
-      <p class="note" id="cohort-label"></p>
-      <label><input type="checkbox" id="consent"> この説明に同意し、回答を匿名で送信します。</label>
-      <div hidden aria-hidden="true"><label>この欄は空欄のままにしてください<input name="website" id="website" tabindex="-1" autocomplete="off"></label></div>
-      <div class="actions"><button id="send" type="button" disabled>同意して回答を送信する</button></div>
-      <p id="send-status" role="status" aria-live="polite"></p>
-      <p class="note">送信後に「最初に戻る」を押しても、保存済みの回答は削除されません。</p>
-    </section>
+    <p id="send-status" role="status" aria-live="polite"></p>
+    <button id="retry" type="button" hidden>もう一度送信する</button>
     <div class="actions"><button id="reset" type="button" class="secondary">この画面の回答を消して最初に戻る</button></div>
   </section>
   <footer>生活と経済｜自分の生活と、その測り方について考えるワークシート</footer>
 </main>
 <script>
-  'use strict';
-  const form = document.getElementById('worksheet');
-  const result = document.getElementById('result');
-  const confirmButton = document.getElementById('confirm');
-  const title = document.getElementById('result-title');
-  const score = document.getElementById('score');
-  const reflection = document.querySelector('.reflection');
-  const relatedQuestions = [["support","社会的支援"],["freedom","人生を選択する自由"],["donation","寄付行動（寛容さの指標）"],["government","政府の腐敗の認識"],["business","企業の腐敗の認識"]];
-  const answerList = document.getElementById('answer-list');
-  function showResult(value) {
-    form.hidden = true;
-    result.hidden = false;
-    title.textContent = 'あなたの回答';
-    answerList.replaceChildren();
-    for (const [name, label] of relatedQuestions) {
-      const row = document.createElement('div');
-      const term = document.createElement('dt');
-      const answer = document.createElement('dd');
-      term.textContent = label;
-      answer.textContent = form.querySelector('input[name="' + name + '"]:checked')?.value || '未回答';
-      row.append(term, answer);
-      answerList.append(row);
-    }
-    score.textContent = value === null ? '' : value + ' / 10';
-    score.hidden = value === null;
-    reflection.hidden = value === null;
-    updateSendAvailability();
-    result.focus();
+'use strict';
+const el = id => document.getElementById(id);
+const form = el('worksheet'), result = el('result'), consent = el('consent');
+const confirmButton = el('confirm'), retryButton = el('retry'), resetButton = el('reset');
+const status = el('send-status');
+const relatedQuestions = [['support','社会的支援'],['freedom','人生を選択する自由'],['donation','寄付行動（寛容さの指標）'],['government','政府の腐敗の認識'],['business','企業の腐敗の認識']];
+const requestedCohort = new URLSearchParams(location.search).get('cohort');
+const cohort = requestedCohort && /^[a-zA-Z0-9_-]{1,64}$/.test(requestedCohort) ? requestedCohort : 'life-evaluation-2026';
+el('cohort-label').textContent = '授業回：' + cohort;
+let submitted = false, pending = false, payload = null;
+const selected = name => form.querySelector('input[name="' + name + '"]:checked')?.value ?? null;
+function hasAnswer() {
+  return [...form.querySelectorAll('input[type="radio"]:checked')].some(input => input.value !== '回答しない');
+}
+function updateButton() {
+  const willSend = consent.checked && !submitted;
+  confirmButton.textContent = pending ? '送信しています…' : willSend ? '回答を送信する' : '送信せずに回答を確認する';
+  confirmButton.disabled = pending || (willSend && !hasAnswer());
+}
+function showResult() {
+  form.hidden = true;
+  result.hidden = false;
+  el('result-title').textContent = 'あなたの回答';
+  const value = selected('life-evaluation');
+  el('score').textContent = value === null ? '' : value + ' / 10';
+  el('score').hidden = value === null;
+  document.querySelector('.reflection').hidden = value === null;
+  el('answer-list').replaceChildren();
+  for (const [name,label] of relatedQuestions) {
+    const row = document.createElement('div'), term = document.createElement('dt'), answer = document.createElement('dd');
+    term.textContent = label;
+    answer.textContent = selected(name) ?? '未回答';
+    row.append(term,answer);
+    el('answer-list').append(row);
   }
-  
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const selected = form.querySelector('input[name="life-evaluation"]:checked');
-    showResult(selected ? selected.value : null);
-  });
-  document.getElementById('skip').addEventListener('click', () => { form.reset(); confirmButton.disabled = false; showResult(null); });
-  document.getElementById('reset').addEventListener('click', () => {
-    form.reset();
-    document.getElementById('consent').checked = false;
-    updateSendAvailability();
-    confirmButton.disabled = false;
-    score.textContent = '';
-    document.getElementById('explanation').open = false;
-    result.hidden = true;
-    form.hidden = false;
-    form.querySelector('input').focus();
-  });
-  const params = new URLSearchParams(location.search);
-  const requestedCohort = params.get('cohort');
-  const cohort = requestedCohort && /^[a-zA-Z0-9_-]{1,64}$/.test(requestedCohort) ? requestedCohort : 'life-evaluation-2026';
-  document.getElementById('cohort-label').textContent = '授業回：' + cohort;
-  const sendButton = document.getElementById('send');
-  const consent = document.getElementById('consent');
-  const sendStatus = document.getElementById('send-status');
-  let submitted = false;
-  let pending = false;
-  let submissionId = crypto.randomUUID();
-  let submissionPayload = null;
-  function updateSendAvailability() {
-    const answered = [...form.querySelectorAll('input[type="radio"]:checked')].some(input => input.value !== '回答しない');
-    sendButton.disabled = submitted || pending || !consent.checked || !answered;
+  result.focus();
+}
+async function sendAnswers() {
+  if (pending || submitted || !payload) return;
+  pending = true;
+  resetButton.disabled = true;
+  retryButton.hidden = true;
+  status.textContent = '送信しています…';
+  updateButton();
+  try {
+    const response = await fetch('/api/life-evaluation', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if (!response.ok || !(await response.json()).ok) throw new Error('send failed');
+    submitted = true;
+    resetButton.disabled = false;
+    status.textContent = '送信しました。ご協力ありがとうございます。';
+  } catch {
+    status.textContent = '送信完了を確認できませんでした。通信状況を確認して、もう一度送信してください。再送しても重複して保存されません。';
+    retryButton.hidden = false;
+  } finally {
+    pending = false;
+    updateButton();
   }
-  consent.addEventListener('change', updateSendAvailability);
-  sendButton.addEventListener('click', async () => {
-    if (sendButton.disabled) return;
-    if (!submissionPayload) {
-      submissionPayload = { id: submissionId, cohort, consent: true, website: document.getElementById('website').value };
-      const selected = form.querySelector('input[name="life-evaluation"]:checked');
-      submissionPayload.life_evaluation = selected ? Number(selected.value) : null;
-      for (const [name] of relatedQuestions) submissionPayload[name] = form.querySelector('input[name="' + name + '"]:checked')?.value || null;
-    }
-    document.getElementById('reset').disabled = true;
-    pending = true;
-    updateSendAvailability();
-    sendStatus.textContent = '送信しています…';
-    try {
-      const response = await fetch('/api/life-evaluation', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(submissionPayload) });
-      if (!response.ok) throw new Error('send failed');
-      const body = await response.json();
-      if (!body.ok) throw new Error('send failed');
-      document.getElementById('reset').disabled = false;
-      submitted = true;
-      consent.disabled = true;
-      sendStatus.textContent = '送信しました。ご協力ありがとうございます。';
-    } catch {
-      sendStatus.textContent = '送信完了を確認できませんでした。通信状況を確認して、もう一度送信してください。再送しても重複して保存されません。';
-    } finally {
-      pending = false;
-      updateSendAvailability();
-    }
-  });
-  // Answers stay in memory until the participant explicitly consents to submission.
+}
+form.addEventListener('change',updateButton);
+form.addEventListener('submit',event => {
+  event.preventDefault();
+  if (confirmButton.disabled) return;
+  const willSend = consent.checked && !submitted;
+  if (willSend) {
+    const score = selected('life-evaluation');
+    payload = {id:crypto.randomUUID(),cohort,consent:true,website:el('website').value,life_evaluation:score === null ? null : Number(score)};
+    for (const [name] of relatedQuestions) payload[name] = selected(name);
+  }
+  showResult();
+  if (willSend) void sendAnswers();
+  else status.textContent = submitted ? 'このページからの回答は送信済みです。' : '回答は送信していません。';
+});
+retryButton.addEventListener('click',sendAnswers);
+el('skip').addEventListener('click',() => {
   form.reset();
+  showResult();
+  status.textContent = '回答は送信していません。';
+  retryButton.hidden = true;
+});
+resetButton.addEventListener('click',() => {
+  if (resetButton.disabled) return;
+  form.reset();
+  payload = null;
+  status.textContent = '';
+  retryButton.hidden = true;
+  el('explanation').open = false;
+  result.hidden = true;
+  form.hidden = false;
+  updateButton();
+  form.querySelector('input[type="radio"]').focus();
+});
+form.reset();
+updateButton();
 </script>
 </body>
 </html>
