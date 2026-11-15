@@ -46,3 +46,7 @@ MuuMuu Mail requires retaining MuuMuu DNS. Do not switch nameservers. Use Pages 
 Build with `npm run build:pages`, deploy with `npm run deploy:pages`. Server gateway code lives outside public assets in `pages/functions/`; `_routes.json` invokes it only for API/admin paths. Pages publishing requires `pages:write` permission. Domain-connection status above is superseded by this external-DNS configuration.
 
 Pages deployment: https://chitabea-web.pages.dev. The custom domain `www.chitabea.com` is registered with Pages and awaits a CNAME at MuuMuu DNS pointing `www` to `chitabea-web.pages.dev`. Nameservers must stay `dns01.muumuu-domain.com` and `dns02.muumuu-domain.com`.
+
+## Completed custom domain
+
+`www.chitabea.com` is active on Cloudflare Pages with HTTPS. MuuMuu DNS CNAME `www` points to `chitabea-web.pages.dev`; MuuMuu nameservers and mail records remain unchanged. Public worksheet and authenticated admin/statistics endpoints have been verified using the custom hostname. Earlier pending-cutover notes are historical. Use `npm run deploy` for a full release of both backend and Pages.

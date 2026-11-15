@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "build": "mkdocs build --strict",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "npm run build && wrangler deploy && node scripts/prepare-pages.mjs && wrangler pages deploy --cwd pages --project-name chitabea-web --branch main",
     "test": "node --test test/*.test.js",
     "build:pages": "mkdocs build --strict && node scripts/prepare-pages.mjs",
     "deploy:pages": "npm run build:pages && wrangler pages deploy --cwd pages --project-name chitabea-web"
