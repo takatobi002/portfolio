@@ -1,0 +1,30 @@
+# Cloudflare hosting
+
+This project keeps MkDocs as its existing site builder. Workers serves the generated `site/` directory, and handles only `/api/*` and `/admin*` before assets.
+
+## Setup
+
+1. `python3 -m venv .venv` then `.venv/bin/pip install -r requirements.txt`.
+2. `npm ci`, then `npx wrangler login`.
+3. `npx wrangler d1 create chitabea-responses`; set its returned database ID in `wrangler.jsonc`.
+4. `npx wrangler d1 migrations apply chitabea-responses --remote`.
+5. Set a strong teacher password through `npx wrangler secret put ADMIN_PASSWORD`. Never commit or paste this password into source.
+6. `PATH="$PWD/.venv/bin:$PATH" npm run deploy`.
+
+Until a custom domain is verified, use the returned workers.dev address. Move DNS to Cloudflare before adding `www.chitabea.com` and `chitabea.com` as Worker Custom Domains. Preserve existing MX/TXT records. Keep GitHub Pages available for rollback until the domain serves the new site correctly.
+
+## Teaching
+
+- Participant URL: `/life-evaluation/?cohort=2026-11-16` (ASCII letters, digits, hyphens, underscores; max 64 characters).
+- Missing cohort defaults to `life-evaluation-2026`.
+- Teacher URL: `/admin/`; username `teacher`, password from the Worker secret.
+- Submission is optional, with an explicit consent checkbox. No name, email, student ID or IP address is stored in D1. Rate limiting transiently uses the connecting IP to reduce automated submissions; logs do not include answer bodies or authorization headers.
+- The admin page provides response count, score mean/median/distribution, answer percentages, support/freedom group means, and CSV export by cohort.
+- Empty score is NULL; score 0 is a valid answer. Missing/declined answers are excluded from valid-response denominators. UUID submission IDs make retries idempotent. This reduces duplicate retries, not repeated submissions by the same person across reloads/devices.
+- Reset clears the browser display; it does not delete submitted data. No public read API exists. Authentication is checked for both admin assets and data; private responses use `Cache-Control: no-store`.
+
+## Checks
+
+`npm test` runs validation/authentication checks. `mkdocs build --strict` checks the entire existing site. Apply local D1 migrations, set a throwaway `.dev.vars` password and run `npm run dev`, then `node test/local-integration.mjs` to test local persistence and aggregation. The integration script is hardcoded to localhost and creates only local synthetic records.
+
+`npx wrangler deploy --dry-run` validates Worker packaging. Remote data and domain behavior require separate verification.

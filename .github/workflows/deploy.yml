@@ -29,4 +29,6 @@ jobs:
       - name: Build and deploy
         run: |
           mkdocs build --strict
-          mkdocs gh-deploy --force 
+      - name: Publish current GitHub Pages site
+        if: github.event_name == 'push'
+        run: mkdocs gh-deploy --force
